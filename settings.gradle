@@ -4,6 +4,10 @@ include ':app:monde'
 
 include ':libs:android:theme'
 
+include ':srv:conduit:http'
+include ':srv:conduit:schemas'
+include ':srv:conduit:schemas:fakes'
+
 include ':std:arch:core'
 include ':std:arch:test'
 include ':std:prelude'

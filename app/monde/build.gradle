@@ -23,7 +23,13 @@ dependencies {
   imp dep('androidx.constraintlayout:constraintlayout')
   imp dep('androidx.core:core-ktx')
   imp dep('androidx.fragment:fragment-ktx')
+  imp dep('com.squareup.moshi:moshi')
+  imp dep('com.squareup.okhttp3:logging-interceptor')
+  imp dep('com.squareup.retrofit2:adapter-rxjava2')
+  imp dep('com.squareup.retrofit2:converter-moshi')
+  imp dep('com.squareup.retrofit2:retrofit')
   imp dep('org.slf4j:slf4j-simple')
 
   imp pro(':libs:android:theme')
+  imp pro(':srv:conduit:http')
 }

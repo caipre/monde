@@ -1,0 +1,6 @@
+apply plugin: 'kotlin'
+
+dependencies {
+  api dep('com.squareup.moshi:moshi')
+  api pro(':srv:conduit:schemas')
+}

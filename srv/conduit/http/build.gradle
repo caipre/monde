@@ -1,0 +1,10 @@
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-kapt'
+
+dependencies {
+  api dep('com.squareup.moshi:moshi')
+  api dep('com.squareup.retrofit2:retrofit')
+  api dep('io.reactivex.rxjava2:rxjava')
+  api pro(':srv:conduit:schemas')
+  api pro(':std:prelude')
+}
