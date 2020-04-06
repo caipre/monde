@@ -1,9 +1,11 @@
 buildscript {
   repositories {
+    google()
     jcenter()
   }
   dependencies {
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.71"
+    classpath 'com.android.tools.build:gradle:3.6.2'
   }
 }
 
@@ -11,3 +13,5 @@ apply from: 'gradle/allprojects.gradle'
 apply from: 'gradle/dependencies.gradle'
 apply from: 'gradle/idea-plugin.gradle'
 apply from: 'gradle/kotlin-plugin.gradle'
+apply from: 'gradle/android-gradle-plugin.gradle'
+apply from: 'gradle/kotlin-android-plugin.gradle'

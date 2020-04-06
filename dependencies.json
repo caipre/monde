@@ -1,4 +1,8 @@
 [
+  {"group": "androidx.appcompat", "version": "1.1.0"},
+  {"group": "androidx.constraintlayout", "version": "2.0.0-beta4"},
+  {"group": "androidx.core", "version": "1.2.0"},
+  {"group": "androidx.fragment", "version": "1.2.4"},
   {"group": "com.google.truth", "version": "1.0.1"},
   {"group": "com.michael-bull.kotlin-result", "version": "1.1.6"},
   {"group": "io.github.microutils", "version": "1.7.8"},

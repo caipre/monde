@@ -1,0 +1,18 @@
+// https://kotlinlang.org/docs/reference/using-gradle.html
+
+allprojects {
+  afterEvaluate {
+    if (project.plugins.hasPlugin('org.jetbrains.kotlin.android')) {
+      android {
+        kotlinOptions {
+          jvmTarget = "1.8"
+        }
+
+        sourceSets {
+          main.java.srcDirs += 'src/main/kotlin'
+          test.java.srcDirs += 'src/test/kotlin'
+        }
+      }
+    }
+  }
+}
