@@ -1,0 +1,5 @@
+apply plugin: 'kotlin'
+
+dependencies {
+  api dep('com.michael-bull.kotlin-result:kotlin-result')
+}

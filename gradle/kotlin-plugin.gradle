@@ -1,0 +1,11 @@
+// https://kotlinlang.org/docs/reference/using-gradle.html
+
+allprojects {
+  afterEvaluate {
+    if (project.plugins.hasPlugin('org.jetbrains.kotlin.jvm')) {
+      dependencies {
+        imp dep('org.jetbrains.kotlin:kotlin-stdlib-jdk8')
+      }
+    }
+  }
+}

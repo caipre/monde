@@ -1,0 +1,7 @@
+buildDir '.build'
+allprojects {
+  buildDir '.build'
+  repositories {
+    jcenter()
+  }
+}

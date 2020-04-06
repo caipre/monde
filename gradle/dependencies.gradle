@@ -1,0 +1,129 @@
+import groovy.json.JsonParserType
+import groovy.json.JsonSlurper
+
+class GroupNameVersion {
+  String group
+  String name
+  String version
+
+  GroupNameVersion(String group, String name, String version) {
+    this.group = group
+    this.name = name
+    this.version = version
+  }
+
+  @Override
+  int hashCode() {
+    return toString().hashCode()
+  }
+
+  @Override
+  boolean equals(Object o) {
+    return o instanceof GroupNameVersion &&
+        o.group == this.group &&
+        o.name == this.name &&
+        o.version == this.version
+  }
+
+  @Override
+  String toString() {
+    return group + ":" + name + ":" + version
+  }
+}
+
+class GroupName {
+  String group
+  String name
+
+  GroupName(String group, String name) {
+    this.group = group
+    this.name = name
+  }
+
+  @Override
+  int hashCode() {
+    return toString().hashCode()
+  }
+
+  @Override
+  boolean equals(Object o) {
+    return o instanceof GroupName &&
+        o.group == this.group &&
+        o.name == this.name
+  }
+
+  @Override
+  String toString() {
+    return group + ":" + name
+  }
+}
+
+class Group {
+  String group
+
+  Group(String group) {
+    this.group = group
+  }
+
+  @Override
+  int hashCode() {
+    return toString().hashCode()
+  }
+
+  @Override
+  boolean equals(Object o) {
+    return o instanceof Group &&
+        o.group == this.group
+  }
+
+  @Override
+  String toString() {
+    return group
+  }
+}
+
+class DependencyExtension {
+  private Map<GroupName, String> groupnames = new LinkedHashMap<>()
+  private Map<Group, String> groups = new LinkedHashMap<>()
+  private DependencyHandler handler
+
+  DependencyExtension(File dependencies, DependencyHandler handler) {
+    def parser = new JsonSlurper(type: JsonParserType.LAX)
+    def json = parser.parse(dependencies) as List<GroupNameVersion>
+    json.each {
+      if (it.name != null) this.groupnames[new GroupName(it.group, it.name)] = it.version
+      this.groups[new Group(it.group)] = it.version
+    }
+    this.handler = handler
+  }
+
+  def lookup(String dependency) {
+    if (!dependency.contains(':')) {
+      throw new GradleException("invalid dependency notation: $dependency")
+    }
+    def (group, name) = dependency.split(':')
+    def gn = new GroupName(group, name)
+    def g = new Group(group)
+    if (groupnames.containsKey(gn)) {
+      def version = groupnames.get(gn)
+      return handler.create("$group:$name:$version")
+    } else if (groups.containsKey(g)) {
+      def version = groups.get(g)
+      return handler.create("$group:$name:$version")
+    } else {
+      throw new GradleException("unknown dependency: $group:$name")
+    }
+  }
+}
+
+def instance = new DependencyExtension(
+    new File(rootProject.rootDir.path + File.separator + "dependencies.json"),
+    project.dependencies)
+
+allprojects {
+  beforeEvaluate {
+    project.dependencies.ext.dep = instance.&lookup
+    project.dependencies.ext.imp = project.dependencies.&implementation
+    project.dependencies.ext.pro = project.&project
+  }
+}

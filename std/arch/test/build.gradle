@@ -1,0 +1,8 @@
+apply plugin: 'kotlin'
+
+dependencies {
+  api pro(':std:arch:core')
+
+  imp dep('com.google.truth:truth')
+  imp dep('junit:junit')
+}

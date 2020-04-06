@@ -1,0 +1,5 @@
+rootProject.name = 'monde'
+
+include ':std:arch:core'
+include ':std:arch:test'
+include ':std:prelude'

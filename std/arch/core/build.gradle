@@ -1,0 +1,10 @@
+apply plugin: 'kotlin'
+
+dependencies {
+  api dep('io.github.microutils:kotlin-logging')
+
+  imp dep('org.slf4j:slf4j-simple')
+
+  testImplementation dep('com.google.truth:truth')
+  testImplementation dep('junit:junit')
+}
