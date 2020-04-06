@@ -24,4 +24,6 @@ dependencies {
   imp dep('androidx.core:core-ktx')
   imp dep('androidx.fragment:fragment-ktx')
   imp dep('org.slf4j:slf4j-simple')
+
+  imp pro(':libs:android:theme')
 }

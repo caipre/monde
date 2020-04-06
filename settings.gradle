@@ -2,6 +2,8 @@ rootProject.name = 'monde'
 
 include ':app:monde'
 
+include ':libs:android:theme'
+
 include ':std:arch:core'
 include ':std:arch:test'
 include ':std:prelude'

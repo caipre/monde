@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/normal"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/headline1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Headline"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1" />
+
+    <TextView
+        android:id="@+id/headline2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Headline 2"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline2" />
+
+    <TextView
+        android:id="@+id/headline3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Headline 3"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3" />
+
+    <TextView
+        android:id="@+id/headline4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Headline 4"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4" />
+
+    <TextView
+        android:id="@+id/headline5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Headline 5"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
+
+    <TextView
+        android:id="@+id/headline6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Headline 6"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+
+    <TextView
+        android:id="@+id/subtitle1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Subtitle 1"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+
+    <TextView
+        android:id="@+id/subtitle2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Subtitle 2"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2" />
+
+    <TextView
+        android:id="@+id/body1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Body 1"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+    <TextView
+        android:id="@+id/body2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Body 2"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
+
+    <TextView
+        android:id="@+id/caption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Caption"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" />
+
+    <TextView
+        android:id="@+id/overline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Overline"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
+
+</LinearLayout>

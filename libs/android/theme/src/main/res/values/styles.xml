@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar" />
+
+    <dimen name="small">8dp</dimen>
+    <dimen name="normal">16dp</dimen>
+    <dimen name="large">32dp</dimen>
+    <dimen name="xlarge">64dp</dimen>
+</resources>
