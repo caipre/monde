@@ -9,5 +9,6 @@ include ':srv:conduit:schemas'
 include ':srv:conduit:schemas:fakes'
 
 include ':std:arch:core'
+include ':std:arch:rx2'
 include ':std:arch:test'
 include ':std:prelude'
