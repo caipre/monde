@@ -49,5 +49,5 @@ val Effect.Companion.nothing: Effect<Nothing>
 fun <T> Effect<T>.fire(): Effect<Nothing> = this.map(::absurd)
 
 @Suppress("UNUSED_PARAMETER")
-fun <T> absurd(ignored: T): Nothing = throw AssertionError("absurd")
+private fun <T> absurd(ignored: T): Nothing = throw AssertionError("absurd")
 

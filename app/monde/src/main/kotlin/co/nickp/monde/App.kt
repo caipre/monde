@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.appcompat.app.AppCompatActivity
 
 class App : Application() {
-    private val ctx: AppContext by lazy { AppContext.create(cacheDir) }
+    val ctx: AppContext by lazy { AppContext.create(cacheDir) }
 }
 
 internal val AppCompatActivity.app: App

@@ -1,0 +1,20 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+dependencies {
+  api dep('androidx.appcompat:appcompat')
+  api dep('androidx.constraintlayout:constraintlayout')
+  api dep('androidx.core:core-ktx')
+  api dep('com.squareup.retrofit2:retrofit')
+  api pro(':libs:android:container')
+  api pro(':libs:android:theme')
+  api pro(':srv:conduit:http')
+  api pro(':std:arch:core')
+  api pro(':std:prelude')
+
+  testImplementation dep('com.google.truth:truth')
+  testImplementation dep('junit:junit')
+  testImplementation pro(':srv:conduit:schemas:fakes')
+  testImplementation pro(':std:arch:rx2')
+  testImplementation pro(':std:arch:test')
+}

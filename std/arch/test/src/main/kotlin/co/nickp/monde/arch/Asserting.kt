@@ -2,11 +2,15 @@ package co.nickp.monde.arch
 
 import com.google.common.truth.Truth.assertThat
 import com.google.common.truth.Truth.assertWithMessage
+import io.reactivex.Scheduler
+import io.reactivex.schedulers.Schedulers
+import java.util.*
 
 class Asserting<Model, Event, Env> private constructor(
     private var _model: Model,
     private val update: Reducer<Model, Event, Env>,
-    private val env: Env
+    private val env: Env,
+    val scheduler: Scheduler // TODO(nickp): decouple from rxjava
 ) : AutoCloseable {
   val model: Model
     get() = _model
@@ -16,11 +20,12 @@ class Asserting<Model, Event, Env> private constructor(
         update: Reducer<Model, Event, Env>,
         env: Env,
         model: Model,
+        scheduler: Scheduler = Schedulers.single(),
         block: Asserting<Model, Event, Env>.() -> Unit
-    ) = Asserting(model, update, env).use { block(it) }
+    ) = Asserting(model, update, env, scheduler).use { block(it) }
   }
 
-  private val effects: MutableList<Effect<Event>> = mutableListOf()
+  private val effects: LinkedList<Effect<Event>> = LinkedList()
 
   fun run(
       vararg events: Event,
@@ -32,7 +37,7 @@ class Asserting<Model, Event, Env> private constructor(
       effects.addAll(next.effects)
       if (until(model)) break
       while (effects.isNotEmpty()) {
-        val effect = effects.removeAt(0)
+        val effect = effects.remove()
         effect.exec { run(it, until = until) }
         if (until(model)) break
       }
@@ -50,11 +55,11 @@ class Asserting<Model, Event, Env> private constructor(
   }
 
   fun recv(vararg events: Event): Asserting<Model, Event, Env> {
-    val events = events.toMutableList()
+    val events = LinkedList(events.toMutableList())
     while (events.isNotEmpty()) {
       assertThat(effects).isNotEmpty()
-      val effect = effects.removeAt(0)
-      val expect = events.removeAt(0)
+      val effect = effects.remove()
+      val expect = events.remove()
       effect.exec {
         assertThat(it).isEqualTo(expect)
         send(it)

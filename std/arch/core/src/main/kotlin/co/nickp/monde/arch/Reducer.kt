@@ -1,14 +1,14 @@
 package co.nickp.monde.arch
 
 import co.nickp.monde.arch.Next.Companion.send
-import co.nickp.monde.arch.Next.Companion.unchanged
+import co.nickp.monde.arch.Next.Companion.pass
 
 typealias Init<Model, Event, Env> = (Env) -> First<Model, Event>
 typealias Reducer<Model, Event, Env> = (Model, Event, Env) -> Next<Model, Event>
 typealias Transducer<InModel, InEvent, Model, Event, Env> = (InModel, InEvent, Env) -> Next<Model, Event>
 
 fun <Model, Event> identity() =
-    { _: Any, _: Any, _: Any -> unchanged<Model, Event>() }
+    { _: Any, _: Any, _: Any -> pass<Model, Event>() }
 
 fun <Model, Event, Env> concat(
     first: Reducer<Model, Event, Env>,
@@ -32,7 +32,7 @@ private fun <Model, Event, Env> concat2(
           Next(fst.model, fs)
         fs.isNotEmpty() ->
           send(fs)
-        else -> unchanged()
+        else -> pass()
       }
     }
 
@@ -49,10 +49,10 @@ fun <OuterModel, InnerModel, OuterEvent, InnerEvent, OuterEnv, InnerEnv> Reducer
           Next(model.embed(inner.model), inner.effects.map { it.map(event.embed) })
         inner.effects.isNotEmpty() ->
           send(inner.effects.map { it.map(event.embed) })
-        else -> unchanged()
+        else -> pass()
       }
-    } ?: unchanged()
-  } ?: unchanged()
+    } ?: pass()
+  } ?: pass()
 }
 
 fun <OuterModel, InnerModel, OuterEvent, InnerEvent, OuterEnv, InnerEnv> Reducer<OuterModel, OuterEvent, OuterEnv>.pushforward(
@@ -73,9 +73,9 @@ fun <OuterModel, InnerModel, OuterEvent, InnerEvent, OuterEnv, InnerEnv> Reducer
         Next(model.set(mo, inner.model), inner.effects.map { it.map(event.embed) })
       inner.effects.isNotEmpty() ->
         send(inner.effects.map { it.map(event.embed) })
-      else -> unchanged()
+      else -> pass()
     }
-  } ?: unchanged()
+  } ?: pass()
 }
 
 inline fun <Model, Event, Env, reified EventA> Reducer<Model, Event, Env>.forward(
@@ -83,8 +83,8 @@ inline fun <Model, Event, Env, reified EventA> Reducer<Model, Event, Env>.forwar
     crossinline fn: (Model, EventA) -> Event?
 ): Reducer<Model, Event, Env> =
     concat(this, { model, event, env ->
-      if (event is EventA) fn(model, event)?.let(::send) ?: unchanged()
-      else unchanged()
+      if (event is EventA) fn(model, event)?.let(::send) ?: pass()
+      else pass()
     })
 
 inline fun <reified InModel, reified InEvent, Model, Event, Env> delegatingTo(
@@ -100,5 +100,5 @@ inline fun <reified InModel, reified InEvent, Model, Event, Env> delegatingTo(
             else -> null
           }
         else -> null
-      } ?: unchanged()
+      } ?: pass()
     }

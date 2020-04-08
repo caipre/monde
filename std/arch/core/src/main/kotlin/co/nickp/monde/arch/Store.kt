@@ -4,13 +4,13 @@ import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger { }
 
-interface Store<Model, Event> : AutoCloseable {
+interface Store<out Model, in Event> : AutoCloseable {
   val model: Model
   fun send(event: Event)
   fun subscribe(fn: (Model) -> Unit): AutoCloseable
 }
 
-class StoreImpl<Model, Event, Env>(
+class StoreImpl<out Model, in Event, in Env>(
     private val update: Reducer<Model, Event, Env>,
     private var _model: Model,
     private val env: Env

@@ -30,6 +30,8 @@ dependencies {
   imp dep('com.squareup.retrofit2:retrofit')
   imp dep('org.slf4j:slf4j-simple')
 
+  imp pro(':feat:login')
+
   imp pro(':libs:android:theme')
   imp pro(':srv:conduit:http')
 }

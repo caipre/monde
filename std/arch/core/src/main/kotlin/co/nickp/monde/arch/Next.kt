@@ -25,7 +25,7 @@ data class Next<out Model, Event>(
     fun <Model, Event> send(effects: List<Effect<Event>>): Next<Model, Event> =
         Next(null, effects)
 
-    fun <Model, Event> unchanged(): Next<Model, Event> =
+    fun <Model, Event> pass(): Next<Model, Event> =
         Next(null, emptyList())
 
     fun <Model, Event, T> fire(event: T): Next<Model, Event> =

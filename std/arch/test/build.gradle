@@ -2,6 +2,7 @@ apply plugin: 'kotlin'
 
 dependencies {
   api pro(':std:arch:core')
+  api dep('io.reactivex.rxjava2:rxjava')
 
   imp dep('com.google.truth:truth')
   imp dep('junit:junit')

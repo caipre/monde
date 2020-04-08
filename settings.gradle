@@ -2,6 +2,9 @@ rootProject.name = 'monde'
 
 include ':app:monde'
 
+include ':feat:login'
+
+include ':libs:android:container'
 include ':libs:android:theme'
 
 include ':srv:conduit:http'
